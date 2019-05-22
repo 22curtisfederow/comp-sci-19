@@ -1,0 +1,31 @@
+import yahoo_finance_pynterface as yahoo
+import datetime
+
+today = datetime.datetime.today()
+yesterday = datetime.datetime.today() - datetime.timedelta(days=1)
+Stock = input("What is the symbol of the stock you bought?")
+price = float(input("What was the price per share?"))
+number_bought = int(input("How many shares did you buy?"))
+fees = float(input("How much did you pay in brokerage fees?"))
+
+
+
+cost_basis = ((price * number_bought) + fees )/number_bought
+
+print("Your cost per share is")
+print (cost_basis)
+
+
+
+## Get the Value of each share
+data = yahoo.Get.Prices(Stock)
+current_price = float(data.Close[-1])
+print(current_price)
+
+
+## Value of portfolio
+value_portfolio = (current_price * number_bought)
+all_value = (value_portfolio - cost_basis*number_bought)
+print("You have made")
+print(all_value)
+## Show profit / loss
